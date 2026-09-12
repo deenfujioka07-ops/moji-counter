@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>文字数カウンター｜文字数・行数・原稿用紙換算が一瞬でわかる無料ツール</title>
+<meta name="description" content="貼り付けるだけで文字数（スペース込み・なし）・行数・段落数・単語数・原稿用紙（400字）換算・バイト数を自動カウントする無料ツール。X（旧Twitter）やタイトル・メタディスクリプションの文字数チェックにも。ブラウザ内で完結し、テキストは外部に送信しません。">
+<meta name="keywords" content="文字数 カウント,文字数カウンター,文字数 数える,原稿用紙 換算,文字数 チェック,行数 カウント,ワード数,X 文字数,無料ツール">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0E8A6E">
+<link rel="canonical" href="https://moji-counter.pages.dev/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="文字数カウンター">
+<meta property="og:title" content="文字数カウンター｜文字数・行数・原稿用紙換算が一瞬でわかる無料ツール">
+<meta property="og:description" content="貼るだけで文字数・行数・原稿用紙換算・バイト数を自動カウント。X やタイトル・メタ説明の文字数チェックにも。ブラウザ内で完結し、テキストは外部に送信しません。">
+<meta property="og:url" content="https://moji-counter.pages.dev/">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文字数カウンター｜文字数・原稿用紙換算ツール">
+<meta name="twitter:description" content="貼るだけで文字数・行数・原稿用紙換算を自動カウント。無料・ブラウザ内で完結。">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "文字数カウンター",
+      "url": "https://moji-counter.pages.dev/",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web",
+      "description": "文字数・行数・段落数・単語数・原稿用紙換算・バイト数をリアルタイムで数える無料ツール。",
+      "inLanguage": "ja",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "無料で使えますか？", "acceptedAnswer": { "@type": "Answer", "text": "はい、完全無料で使えます。会員登録も不要で、回数制限もありません。" } },
+        { "@type": "Question", "name": "入力したテキストは外部に送信されますか？", "acceptedAnswer": { "@type": "Answer", "text": "いいえ。すべての処理はあなたのブラウザ内（端末内）で完結し、入力したテキストがサーバーに送信されることはありません。" } },
+        { "@type": "Question", "name": "スペースや改行は文字数に含まれますか？", "acceptedAnswer": { "@type": "Answer", "text": "「文字数（空白込み）」はスペースを含み、改行は除いて数えます。「文字数（空白なし）」はスペース・タブ・改行・全角スペースをすべて除いて数えます。用途に合わせて両方を表示しています。" } },
+        { "@type": "Question", "name": "原稿用紙の枚数はどう計算していますか？", "acceptedAnswer": { "@type": "Answer", "text": "一般的な400字詰め原稿用紙として、文字数（空白込み）を400で割って切り上げた枚数を表示します。" } }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root{
+    --bg:#EAEEF2;
+    --surface:#FFFFFF;
+    --surface-2:#F3F6F8;
+    --ink:#1B2733;
+    --ink-soft:#566575;
+    --ink-faint:#8695A4;
+    --line:#D7DEE5;
+    --line-strong:#C2CCD5;
+    --accent:#0E8A6E;
+    --accent-ink:#0A6B56;
+    --accent-soft:#DBEFE8;
+    --danger:#BD4630;
+    --danger-soft:#F6E2DC;
+    --shadow:0 1px 2px rgba(27,39,51,.05),0 8px 24px rgba(27,39,51,.06);
+    --radius:14px;
+    --font-display:"Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+    --font-body:"Noto Sans JP",system-ui,sans-serif;
+    --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme:dark){
+      --bg:#0F141A;
+      --surface:#171F28;
+      --surface-2:#1D2731;
+      --ink:#E8EDF2;
+      --ink-soft:#98A7B6;
+      --ink-faint:#6C7B8A;
+      --line:#293641;
+      --line-strong:#37454F;
+      --accent:#34C9A5;
+      --accent-ink:#54D9B8;
+      --accent-soft:#123A31;
+      --danger:#E67A60;
+      --danger-soft:#3A201A;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0F141A;
+    --surface:#171F28;
+    --surface-2:#1D2731;
+    --ink:#E8EDF2;
+    --ink-soft:#98A7B6;
+    --ink-faint:#6C7B8A;
+    --line:#293641;
+    --line-strong:#37454F;
+    --accent:#34C9A5;
+    --accent-ink:#54D9B8;
+    --accent-soft:#123A31;
+    --danger:#E67A60;
+    --danger-soft:#3A201A;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 56px}
+
+  header{margin-bottom:22px}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent-ink);font-weight:700;
+    display:flex;align-items:center;gap:8px;margin-bottom:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);border-radius:2px}
+  h1{
+    font-family:var(--font-display);font-weight:900;
+    font-size:clamp(28px,5vw,40px);line-height:1.15;margin:0 0 8px;
+    letter-spacing:-.01em;text-wrap:balance;
+  }
+  .tagline{color:var(--ink-soft);font-size:15px;max-width:60ch;margin:0}
+  .tagline b{color:var(--ink);font-weight:700}
+
+  .toolbar{
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+    margin:22px 0 16px;
+  }
+  .spacer{flex:1 1 auto}
+  .btn{
+    display:inline-flex;align-items:center;gap:7px;
+    padding:8px 14px;border-radius:999px;cursor:pointer;
+    font-family:var(--font-body);font-size:13px;font-weight:700;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+    transition:.15s;
+  }
+  .btn:hover{border-color:var(--line-strong);color:var(--ink)}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .panel{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);box-shadow:var(--shadow);
+    display:flex;flex-direction:column;overflow:hidden;min-height:340px;
+  }
+  .panel-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:13px 16px;border-bottom:1px solid var(--line);gap:10px;
+  }
+  .panel-title{display:flex;align-items:center;gap:9px;font-weight:700;font-size:14px}
+  .panel-title .dot{width:8px;height:8px;border-radius:50%;flex:none}
+  .dot.in{background:var(--ink-faint)}
+  .dot.out{background:var(--accent)}
+  .panel-title small{color:var(--ink-faint);font-weight:500;font-size:12px}
+  .count{font-family:var(--font-mono);font-size:12px;color:var(--ink-faint);font-weight:500}
+
+  textarea{
+    flex:1;width:100%;border:0;resize:none;padding:16px;
+    font-family:var(--font-body);font-size:15px;line-height:1.9;
+    color:var(--ink);background:transparent;outline:none;min-height:300px;
+  }
+  textarea::placeholder{color:var(--ink-faint)}
+
+  /* Count panel */
+  .countbox{padding:22px 18px;flex:1;display:flex;flex-direction:column;gap:20px}
+  .big{font-family:var(--font-mono);font-weight:700;line-height:1;color:var(--accent-ink);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .big #c-main{font-size:clamp(44px,9vw,66px);font-variant-numeric:tabular-nums}
+  .big .big-u{font-size:18px;color:var(--ink-soft);font-weight:700}
+  .big .big-sub{font-size:12.5px;color:var(--ink-faint);font-weight:600;width:100%;font-family:var(--font-body)}
+  .target{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:11px}
+  .target-lab{font-size:12.5px;color:var(--ink-faint);font-weight:600}
+  .target-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .target-row input{width:120px;padding:9px 11px;border:1px solid var(--line-strong);border-radius:9px;background:var(--surface-2);color:var(--ink);font-family:var(--font-mono);font-size:14px;outline:none}
+  .target-row input:focus{border-color:var(--accent)}
+  .remain{font-family:var(--font-mono);font-weight:700;font-size:14px;color:var(--accent-ink)}
+  .remain.over{color:var(--danger)}
+  .presets{display:flex;flex-wrap:wrap;gap:7px}
+  .preset{padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:.15s}
+  .preset:hover{border-color:var(--line-strong);color:var(--ink)}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat .k{font-size:11.5px;color:var(--ink-faint);font-weight:500;letter-spacing:.02em}
+  .stat .v{font-family:var(--font-mono);font-weight:700;font-size:22px;margin-top:3px;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .stat .v .u{font-size:12px;color:var(--ink-faint);margin-left:3px;font-weight:500}
+  .stat.hl .v{color:var(--accent-ink)}
+
+  footer{margin-top:24px;color:var(--ink-faint);font-size:12.5px;line-height:1.7}
+  footer code{font-family:var(--font-mono);background:var(--surface-2);padding:1px 6px;border-radius:5px;font-size:11.5px}
+
+  @media (max-width:760px){
+    .grid{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr 1fr}
+    .panel{min-height:auto}
+    textarea{min-height:200px}
+  }
+  .doc{max-width:66ch;margin:52px auto 0;display:flex;flex-direction:column;gap:38px}
+  .doc h2{
+    font-family:var(--font-display);font-weight:700;font-size:21px;line-height:1.3;
+    margin:0 0 14px;border-left:3px solid var(--accent);padding-left:13px;color:var(--ink);
+    text-wrap:balance;
+  }
+  .doc p{margin:0 0 12px;color:var(--ink-soft);font-size:15px;line-height:1.95}
+  .doc p:last-child{margin-bottom:0}
+  .doc b{color:var(--ink);font-weight:700}
+  .doc a{color:var(--accent-ink);font-weight:700;text-underline-offset:3px}
+  .doc ul,.doc ol{margin:0;padding-left:1.35em;color:var(--ink-soft);display:flex;flex-direction:column;gap:8px;font-size:15px}
+  .doc li{line-height:1.85}
+  .doc li::marker{color:var(--accent)}
+  .doc dl{margin:0;display:flex;flex-direction:column;gap:18px}
+  .doc dt{font-weight:700;color:var(--ink);font-size:15.5px;margin-bottom:5px;display:flex;gap:8px}
+  .doc dt::before{content:"Q.";color:var(--accent-ink);font-family:var(--font-mono);font-weight:700;flex:none}
+  .doc dd{margin:0;color:var(--ink-soft);font-size:15px;line-height:1.9;padding-left:1.7em}
+  .steps{list-style:none;padding:0;counter-reset:step;gap:12px}
+  .steps li{position:relative;padding-left:42px;line-height:1.8;color:var(--ink-soft)}
+  .steps li::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;
+    background:var(--accent-soft);color:var(--accent-ink);
+    display:grid;place-items:center;font-family:var(--font-mono);font-weight:700;font-size:13px;
+  }
+  @media (max-width:760px){.doc{margin-top:40px}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">文字数 · Moji Counter</div>
+    <h1>文字数カウンター</h1>
+    <p class="tagline">貼り付けるだけで<b>文字数・行数・原稿用紙換算</b>を自動カウント。<b>X やタイトル・メタ説明の文字数チェック</b>にも。ブラウザ内で完結し、テキストはどこにも送信しません。</p>
+  </header>
+
+  <div class="toolbar" role="group" aria-label="操作">
+    <span class="spacer"></span>
+    <button class="btn" id="btn-sample" type="button">サンプル読込</button>
+    <button class="btn" id="btn-clear" type="button">クリア</button>
+  </div>
+
+  <div class="grid">
+    <section class="panel">
+      <div class="panel-head">
+        <div class="panel-title"><span class="dot in"></span>入力 <small>文章を貼り付け</small></div>
+        <span class="count" id="count-in">0 字</span>
+      </div>
+      <textarea id="src" spellcheck="false" placeholder="ここに文章を貼り付け／入力すると、リアルタイムでカウントします…"></textarea>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div class="panel-title"><span class="dot out"></span>カウント <small>文字数（空白込み）</small></div>
+      </div>
+      <div class="countbox">
+        <div class="big"><span id="c-main">0</span><span class="big-u">文字</span><span class="big-sub">スペースを含み、改行は除いて数えた文字数です</span></div>
+        <div class="target">
+          <div class="target-lab">上限を指定して残り文字数をチェック</div>
+          <div class="target-row">
+            <input id="limit" type="number" min="0" inputmode="numeric" placeholder="例: 140">
+            <span class="remain" id="remain"></span>
+          </div>
+          <div class="presets">
+            <button class="preset" type="button" data-n="140">X（ポスト）140</button>
+            <button class="preset" type="button" data-n="32">ページタイトル 32</button>
+            <button class="preset" type="button" data-n="120">メタ説明 120</button>
+            <button class="preset" type="button" data-n="400">原稿用紙 400</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="stats">
+    <div class="stat hl"><div class="k">文字数（空白込み）</div><div class="v"><span id="s-incl">0</span><span class="u">字</span></div></div>
+    <div class="stat hl"><div class="k">文字数（空白なし）</div><div class="v"><span id="s-excl">0</span><span class="u">字</span></div></div>
+    <div class="stat"><div class="k">行数</div><div class="v"><span id="s-lines">0</span><span class="u">行</span></div></div>
+    <div class="stat"><div class="k">段落数</div><div class="v"><span id="s-para">0</span><span class="u">段落</span></div></div>
+    <div class="stat"><div class="k">単語数</div><div class="v"><span id="s-words">0</span><span class="u">語</span></div></div>
+    <div class="stat"><div class="k">原稿用紙（400字）</div><div class="v"><span id="s-genko">0</span><span class="u">枚</span></div></div>
+    <div class="stat"><div class="k">全角換算</div><div class="v"><span id="s-zen">0</span><span class="u">字</span></div></div>
+    <div class="stat"><div class="k">バイト数（UTF-8）</div><div class="v"><span id="s-bytes">0</span><span class="u">B</span></div></div>
+  </div>
+
+  <article class="doc">
+    <section>
+      <h2>文字数カウンターとは</h2>
+      <p>文字数カウンターは、入力・貼り付けた文章の<b>文字数をリアルタイムで数える無料ツール</b>です。スペースを含む／含まない文字数のほか、<b>行数・段落数・単語数・原稿用紙（400字）換算・バイト数（UTF-8）</b>まで一度に表示します。レポートや作文の文字数確認、Web記事のタイトル・メタディスクリプションの調整、SNS投稿の文字数チェックなどに使えます。</p>
+      <p>すべての処理はあなたのブラウザ内（端末内）で完結し、<b>入力したテキストがサーバーに送信されることはありません</b>。仕事の下書きでも安心して使えます。</p>
+    </section>
+    <section>
+      <h2>使い方</h2>
+      <ol class="steps">
+        <li>左の「入力」欄に文章を貼り付け（または入力）します。</li>
+        <li>右側と下の各カウントが<b>リアルタイムで更新</b>されます。</li>
+        <li>上限をチェックしたいときは「上限を指定」に数値を入れる（または X 140 などのボタン）と、<b>残り文字数</b>が表示されます。</li>
+      </ol>
+    </section>
+    <section>
+      <h2>カウントの種類</h2>
+      <ul>
+        <li><b>文字数（空白込み）</b>：スペースを含み、改行は除いた文字数（一般的な「文字数」）</li>
+        <li><b>文字数（空白なし）</b>：スペース・タブ・改行・全角スペースをすべて除いた文字数</li>
+        <li><b>行数・段落数</b>：改行数と、空行で区切られたまとまりの数</li>
+        <li><b>単語数</b>：スペースで区切られた語の数（英文の目安に便利）</li>
+        <li><b>原稿用紙（400字）</b>：400字詰め原稿用紙に換算した枚数（切り上げ）</li>
+        <li><b>全角換算</b>：半角文字を0.5字として合計した文字数（全角基準の字数制限向け）</li>
+        <li><b>バイト数（UTF-8）</b>：UTF-8で符号化したときのバイト数</li>
+      </ul>
+    </section>
+    <section>
+      <h2>文字数の目安（用途別）</h2>
+      <ul>
+        <li><b>X（旧Twitter）</b>：1ポスト 140字（全角基準の目安）</li>
+        <li><b>ページタイトル（title）</b>：全角30文字前後まで（検索結果で省略されにくい目安）</li>
+        <li><b>メタディスクリプション</b>：全角120文字前後まで</li>
+        <li><b>原稿用紙</b>：1枚あたり400字（400字詰め）</li>
+        <li><b>エントリーシート・小論文</b>：指定字数に対して「残り文字数」でチェック</li>
+      </ul>
+    </section>
+    <section>
+      <h2>関連ツール</h2>
+      <p>文章の下ごしらえには姉妹ツールもどうぞ。話し言葉のケバ取り・整文は<a href="https://seibun-cleaner.pages.dev/">整文クリーナー</a>、PDF・メールのコピペ改行の削除・整形は<a href="https://kaigyo-cleaner.pages.dev/">改行クリーナー</a>が便利です。</p>
+    </section>
+    <section>
+      <h2>よくある質問</h2>
+      <dl>
+        <dt>無料で使えますか？</dt>
+        <dd>はい、完全無料で使えます。会員登録も不要で、回数制限もありません。</dd>
+        <dt>入力したテキストは外部に送信されますか？</dt>
+        <dd>いいえ。すべての処理はブラウザ内で完結し、入力したテキストがサーバーに送信されることはありません。</dd>
+        <dt>スペースや改行は文字数に含まれますか？</dt>
+        <dd>「文字数（空白込み）」はスペースを含み改行は除いて数えます。「文字数（空白なし）」はスペース・タブ・改行・全角スペースをすべて除いて数えます。用途に合わせて両方を表示しています。</dd>
+        <dt>原稿用紙の枚数はどう計算していますか？</dt>
+        <dd>一般的な400字詰め原稿用紙として、文字数（空白込み）を400で割って切り上げた枚数を表示します。</dd>
+      </dl>
+    </section>
+  </article>
+
+  <footer>
+    ※ 文字数の数え方はサービスや用途によって異なります（改行や空白の扱いなど）。提出先の規定がある場合は、その基準に合わせてご確認ください。<br>
+    処理はすべて端末内（<code>JavaScript</code>）で完結し、入力テキストはサーバーに送信されません。
+  </footer>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const src=$('src');
+
+  const SAMPLE = "ここに文章を貼り付けると、文字数・行数・原稿用紙の枚数などが自動で表示されます。\nX（旧Twitter）の投稿や、ページタイトル・メタディスクリプションの文字数チェックにも使えます。\n\nすべての処理はブラウザ内で行われ、入力した文章は外部に送信されません。";
+
+  const cp = s => Array.from(s).length;
+
+  function updateRemain(count){
+    const el=$('remain'), raw=$('limit').value;
+    const lim=parseInt(raw,10);
+    if(raw==='' || !Number.isFinite(lim)){ el.textContent=''; el.classList.remove('over'); return; }
+    const r=lim-count;
+    if(r>=0){ el.textContent='残り '+r.toLocaleString()+' 字'; el.classList.remove('over'); }
+    else{ el.textContent=Math.abs(r).toLocaleString()+' 字オーバー'; el.classList.add('over'); }
+  }
+
+  function render(){
+    const raw=src.value.replace(/\r/g,'');
+    const noBreak=raw.replace(/\n/g,'');
+    const incl=cp(noBreak);
+    const excl=cp(raw.replace(/[\s　]/g,''));
+    const lines=raw===''?0:raw.split('\n').length;
+    const paras=raw.trim()?raw.split(/\n[ \t　]*\n+/).filter(s=>s.trim()).length:0;
+    const words=raw.trim()?raw.trim().split(/[\s　]+/).length:0;
+    const genko=Math.ceil(incl/400);
+    let zen=0;
+    for(const ch of noBreak){
+      const c=ch.codePointAt(0);
+      const half=(c<=0x7F)||(c>=0xFF61&&c<=0xFF9F);
+      zen+=half?0.5:1;
+    }
+    zen=Math.ceil(zen);
+    const bytes=new TextEncoder().encode(raw).length;
+
+    $('c-main').textContent=incl.toLocaleString();
+    $('s-incl').textContent=incl.toLocaleString();
+    $('s-excl').textContent=excl.toLocaleString();
+    $('s-lines').textContent=lines.toLocaleString();
+    $('s-para').textContent=paras.toLocaleString();
+    $('s-words').textContent=words.toLocaleString();
+    $('s-genko').textContent=genko.toLocaleString();
+    $('s-zen').textContent=zen.toLocaleString();
+    $('s-bytes').textContent=bytes.toLocaleString();
+    $('count-in').textContent=incl.toLocaleString()+' 字';
+    updateRemain(incl);
+  }
+
+  document.querySelectorAll('.preset').forEach(b=>{
+    b.addEventListener('click',()=>{ $('limit').value=b.dataset.n; render(); $('limit').focus(); });
+  });
+  $('limit').addEventListener('input',render);
+  src.addEventListener('input',render);
+  $('btn-sample').onclick=()=>{src.value=SAMPLE;render();src.focus();};
+  $('btn-clear').onclick=()=>{src.value='';render();src.focus();};
+
+  src.value=SAMPLE;
+  render();
+})();
+</script>
+</body>
+</html>
