@@ -11,5 +11,5 @@
 
 ## 姉妹ツール
 
-- 整文クリーナー: https://seibun-cleaner.pages.dev/
-- 改行クリーナー: https://kaigyo-cleaner.pages.dev/
+- 整文クリーナー: https://seibun.moji-tools.com/
+- 改行クリーナー: https://kaigyo.moji-tools.com/
